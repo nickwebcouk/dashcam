@@ -2,15 +2,19 @@
 # touchv7
 # Texy 5/2/2014
 
-import pygame, sys, os, time, math, datetime
+import pygame, sys, os, time, math, datetime, gps
 from pygame.locals import *
 from time import strftime,gmtime,sleep
 from smbus import SMBus
 from ctypes import c_short
 from LSM9DS0 import *
 
+logfilename = time.strftime("%Y%m%d-%H%M%S")
 #bus = smbus.SMBus(1)
 bus = SMBus(1);         # 0 for R-Pi Rev. 1, 1 for Rev. 2
+
+session = gps.gps("localhost", "2947")
+session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
 
 RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
@@ -31,15 +35,12 @@ def writeGRY(register,value):
         bus.write_byte_data(GYR_ADDRESS, register, value)
         return -1
 
-
-
 def readACCx():
         acc_l = bus.read_byte_data(ACC_ADDRESS, OUT_X_L_A)
         acc_h = bus.read_byte_data(ACC_ADDRESS, OUT_X_H_A)
 	acc_combined = (acc_l | acc_h <<8)
 
 	return acc_combined  if acc_combined < 32768 else acc_combined - 65536
-
 
 def readACCy():
         acc_l = bus.read_byte_data(ACC_ADDRESS, OUT_Y_L_A)
@@ -56,14 +57,12 @@ def readACCz():
 
 	return acc_combined  if acc_combined < 32768 else acc_combined - 65536
 
-
 def readMAGx():
         mag_l = bus.read_byte_data(MAG_ADDRESS, OUT_X_L_M)
         mag_h = bus.read_byte_data(MAG_ADDRESS, OUT_X_H_M)
         mag_combined = (mag_l | mag_h <<8)
 
         return mag_combined  if mag_combined < 32768 else mag_combined - 65536
-
 
 def readMAGy():
         mag_l = bus.read_byte_data(MAG_ADDRESS, OUT_Y_L_M)
@@ -72,7 +71,6 @@ def readMAGy():
 
         return mag_combined  if mag_combined < 32768 else mag_combined - 65536
 
-
 def readMAGz():
         mag_l = bus.read_byte_data(MAG_ADDRESS, OUT_Z_L_M)
         mag_h = bus.read_byte_data(MAG_ADDRESS, OUT_Z_H_M)
@@ -80,15 +78,12 @@ def readMAGz():
 
         return mag_combined  if mag_combined < 32768 else mag_combined - 65536
 
-
-
 def readGYRx():
         gyr_l = bus.read_byte_data(GYR_ADDRESS, OUT_X_L_G)
         gyr_h = bus.read_byte_data(GYR_ADDRESS, OUT_X_H_G)
         gyr_combined = (gyr_l | gyr_h <<8)
 
         return gyr_combined  if gyr_combined < 32768 else gyr_combined - 65536
-
 
 def readGYRy():
         gyr_l = bus.read_byte_data(GYR_ADDRESS, OUT_Y_L_G)
@@ -103,8 +98,6 @@ def readGYRz():
         gyr_combined = (gyr_l | gyr_h <<8)
 
         return gyr_combined  if gyr_combined < 32768 else gyr_combined - 65536
-
-
 
 
 #initialise the accelerometer
@@ -126,8 +119,27 @@ gyroZangle = 0.0
 CFangleX = 0.0
 CFangleY = 0.0
 
-
 os.environ["SDL_FBDEV"] = "/dev/fb1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 pygame.init()
 
@@ -159,27 +171,45 @@ displayspeed = 0
 running = True
 # run the game loop
 while running:
+    report = session.next()
+    if report['class'] == 'TPV':
+        report.time = str(report.time)
+        report.device = str(report.device)
+        report.lon = str(report.lon)
+        report.lat = str(report.lat)
+        report.mode = str(report.mode)
+        report.eps = str(report.eps)
+        report.epx = str(report.epx)
+        report.epy = str(report.epy)
+        report.epv = str(report.epv)
+        report.speed = 2.23693629 * report.speed
+        report.speed = str(report.speed)
+    else:
+        report.time = str("ERROR")
+        report.device = str("ERROR")
+        report.lon = str("ERROR")
+        report.lat = str("ERROR")
+        report.mode = str("ERROR")
+        report.eps = str("ERROR")
+        report.epx = str("ERROR")
+        report.epy = str("ERROR")
+        report.epv = str("ERROR")
+        report.speed = str("ERROR")
     speed = speed + 1
     background.fill(BLACK)
     # Display some text
-    font = pygame.font.Font("/home/pi/bold.ttf", 72)
-    displayspeed = int(displayspeed)
-    if (speed % 7) == 0:
-        displayspeed = displayspeed + 1
-        displayspeed = str(displayspeed)
-    displayspeed = str(displayspeed)
-    if displayspeed == "89":
-        time.sleep(60)
+    font = pygame.font.Font("bold.ttf", 72)
+    displayspeed = report.speed
     text = font.render(displayspeed, 1, (WHITE))
     textpos = text.get_rect(centerx=background.get_width()/2,centery=26)
     background.blit(text, textpos)
 
-    font = pygame.font.Font("/home/pi/audi.ttf", 14)
+    font = pygame.font.Font("audi.ttf", 14)
     text = font.render("MPH", 1, (WHITE))
     textpos = text.get_rect(centerx=background.get_width()/2,centery=65)
     background.blit(text, textpos)
 
-    font = pygame.font.Font("/home/pi/audi.ttf", 14)
+    font = pygame.font.Font("audi.ttf", 14)
     currenttime = time.strftime("%H:%M:%S", gmtime())
     gmttext = " GMT"
     currenttime = currenttime + gmttext
@@ -249,7 +279,7 @@ while running:
     #print
     t = t/10.0
     p = p/100.0
-    font = pygame.font.Font("/home/pi/audi.ttf", 12)
+    font = pygame.font.Font("audi.ttf", 12)
     tempprint = "Temp:" + str(t) + "C"
     temptext = font.render(tempprint, 1, (WHITE))
     presprint = "Pres:" + str(p) + "hPa"
@@ -300,7 +330,7 @@ while running:
     textcfaxhelper = "{:.2f}".format(CFangleX)
     textcfayhelper = "{:.2f}".format(CFangleY)
     textheadhelper = "{:.0f}".format(heading)
-    font = pygame.font.Font("/home/pi/audi.ttf", 12)
+    font = pygame.font.Font("audi.ttf", 12)
     textaccx = font.render("AX:" + str(textaccxhelper), 1, (WHITE))
     textaccy = font.render("AY:" + str(textaccyhelper), 1, (WHITE))
     textcfax = font.render("CX:" + str(textcfaxhelper), 1, (WHITE))
@@ -313,3 +343,16 @@ while running:
     screen.blit(textcfay, (70,128))
     screen.blit(texthead, (5,142))
     background.blit(text, textpos)
+
+
+    textaccxsave = textaccxhelper
+    textaccysave = textaccyhelper
+    textcfaxsave = textcfaxhelper
+    textcfaysave = textcfayhelper
+    textheadsave = textheadhelper
+
+    #        GPS TIME            GPS DEVICE            LONGTITUDE         LATITUDE           REPORT MODE                                                                                     GPS SPEED            GYRO ACC X           GYRO ACC Y           GYRO K X             GYRO K Y             GYRO HEAD            TEMP           PRESS          DEVICE TIME
+    tosave = report.time + "," + report.device + "," + report.lon + "," + report.lat + "," + report.mode + "," + report.eps + "," + report.epx + "," + report.epy + "," + report.epv + "," + report.speed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "\n"
+    f = open(logfilename + '.txt', 'a') #create a file using the given input
+    f.write(tosave)
+    f.close()
