@@ -353,6 +353,6 @@ while running:
 
     #        GPS TIME            GPS DEVICE            LONGTITUDE         LATITUDE           REPORT MODE                                                                                     GPS SPEED            GYRO ACC X           GYRO ACC Y           GYRO K X             GYRO K Y             GYRO HEAD            TEMP           PRESS          DEVICE TIME
     tosave = report.time + "," + report.device + "," + report.lon + "," + report.lat + "," + report.mode + "," + report.eps + "," + report.epx + "," + report.epy + "," + report.epv + "," + report.speed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "\n"
-    f = open(logfilename + '.txt', 'a') #create a file using the given input
+    f = open(logfilename + '.nickgps', 'a') #create a file using the given input
     f.write(tosave)
     f.close()

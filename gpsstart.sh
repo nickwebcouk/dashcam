@@ -1,4 +1,5 @@
 #!/bin/bash
 
 sudo gpsd /dev/ttyAMA0 -F /var/run/gpsd.sock
-sudo python gpslogger.py
+sleep 10
+sudo python main.py
