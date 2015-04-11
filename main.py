@@ -3,13 +3,27 @@
 # Texy 5/2/2014
 
 import pygame, sys, os, time, math, datetime, gps
+import RPi.GPIO as GPIO ## Import GPIO library
 from pygame.locals import *
 from time import strftime,gmtime,sleep
 from smbus import SMBus
 from ctypes import c_short
 from LSM9DS0 import *
 
-logfilename = time.strftime("%Y%m%d-%H%M%S")
+
+def restart():
+    command = "/usr/bin/sudo /sbin/halt"
+    import subprocess
+    process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+    output = process.communicate()[0]
+    print output
+
+GPIO.setmode(GPIO.BOARD) ## Use board pin numbering
+GPIO.setup(13, GPIO.OUT) ## Setup GPIO Pin 7 to OUT
+GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+
+logfilename = "/home/pi/pidashcam/logs/" + time.strftime("%Y%m%d-%H%M%S")
 #bus = smbus.SMBus(1)
 bus = SMBus(1);         # 0 for R-Pi Rev. 1, 1 for Rev. 2
 
@@ -173,43 +187,74 @@ running = True
 while running:
     report = session.next()
     if report['class'] == 'TPV':
-        report.time = str(report.time)
-        report.device = str(report.device)
-        report.lon = str(report.lon)
-        report.lat = str(report.lat)
-        report.mode = str(report.mode)
-        report.eps = str(report.eps)
-        report.epx = str(report.epx)
-        report.epy = str(report.epy)
-        report.epv = str(report.epv)
-        report.speed = 2.23693629 * report.speed
-        report.speed = str(report.speed)
+        if hasattr(report, 'time'):
+            report.time = str(report.time)
+        else:
+            report.time = str("ERROR 1")
+        if hasattr(report, 'device'):
+            report.device = str(report.device)
+        else:
+            report.device = str("ERROR 1")
+        if hasattr(report, 'lon'):
+            report.lon = str(report.lon)
+        else:
+            report.lon = str("ERROR 1")
+        if hasattr(report, 'lat'):
+            report.lat = str(report.lat)
+        else:
+            report.lat = str("ERROR 1")
+        if hasattr(report, 'mode'):
+            report.mode = str(report.mode)
+        else:
+            report.mode = str("ERROR 1")
+        if hasattr(report, 'eps'):
+            report.eps = str(report.eps)
+        else:
+            report.eps = str("ERROR 1")
+        if hasattr(report, 'epx'):
+            report.epx = str(report.epx)
+        else:
+            report.epx = str("ERROR 1")
+        if hasattr(report, 'epy'):
+            report.epy = str(report.epy)
+        else:
+            report.epy = str("ERROR 1")
+        if hasattr(report, 'epv'):
+            report.epv = str(report.epv)
+        else:
+            report.epv = str("ERROR 1")
+        if hasattr(report, 'speed'):
+            report.speed = 2.23693629 * report.speed
+	    report.speed = "{:.0f}".format(report.speed)
+            report.speed = str(report.speed)
+        else:
+            report.speed = str("ERROR 1")
     else:
-        report.time = str("ERROR")
-        report.device = str("ERROR")
-        report.lon = str("ERROR")
-        report.lat = str("ERROR")
-        report.mode = str("ERROR")
-        report.eps = str("ERROR")
-        report.epx = str("ERROR")
-        report.epy = str("ERROR")
-        report.epv = str("ERROR")
-        report.speed = str("ERROR")
+        report.time = str("ERROR 2")
+        report.device = str("ERROR 2")
+        report.lon = str("ERROR 2")
+        report.lat = str("ERROR 2")
+        report.mode = str("ERROR 2")
+        report.eps = str("ERROR 2")
+        report.epx = str("ERROR 2")
+        report.epy = str("ERROR 2")
+        report.epv = str("ERROR 2")
+        report.speed = str("ERROR 2")
     speed = speed + 1
     background.fill(BLACK)
     # Display some text
-    font = pygame.font.Font("bold.ttf", 72)
+    font = pygame.font.Font("/home/pi/pidashcam/bold.ttf", 72)
     displayspeed = report.speed
     text = font.render(displayspeed, 1, (WHITE))
     textpos = text.get_rect(centerx=background.get_width()/2,centery=26)
     background.blit(text, textpos)
 
-    font = pygame.font.Font("audi.ttf", 14)
+    font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 14)
     text = font.render("MPH", 1, (WHITE))
     textpos = text.get_rect(centerx=background.get_width()/2,centery=65)
     background.blit(text, textpos)
 
-    font = pygame.font.Font("audi.ttf", 14)
+    font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 14)
     currenttime = time.strftime("%H:%M:%S", gmtime())
     gmttext = " GMT"
     currenttime = currenttime + gmttext
@@ -279,7 +324,7 @@ while running:
     #print
     t = t/10.0
     p = p/100.0
-    font = pygame.font.Font("audi.ttf", 12)
+    font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 12)
     tempprint = "Temp:" + str(t) + "C"
     temptext = font.render(tempprint, 1, (WHITE))
     presprint = "Pres:" + str(p) + "hPa"
@@ -330,7 +375,7 @@ while running:
     textcfaxhelper = "{:.2f}".format(CFangleX)
     textcfayhelper = "{:.2f}".format(CFangleY)
     textheadhelper = "{:.0f}".format(heading)
-    font = pygame.font.Font("audi.ttf", 12)
+    font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 12)
     textaccx = font.render("AX:" + str(textaccxhelper), 1, (WHITE))
     textaccy = font.render("AY:" + str(textaccyhelper), 1, (WHITE))
     textcfax = font.render("CX:" + str(textcfaxhelper), 1, (WHITE))
@@ -344,15 +389,18 @@ while running:
     screen.blit(texthead, (5,142))
     background.blit(text, textpos)
 
-
     textaccxsave = textaccxhelper
     textaccysave = textaccyhelper
     textcfaxsave = textcfaxhelper
     textcfaysave = textcfayhelper
     textheadsave = textheadhelper
-
+    GPIO.output(13,True) ## Turn on GPIO pin 7
     #        GPS TIME            GPS DEVICE            LONGTITUDE         LATITUDE           REPORT MODE                                                                                     GPS SPEED            GYRO ACC X           GYRO ACC Y           GYRO K X             GYRO K Y             GYRO HEAD            TEMP           PRESS          DEVICE TIME
     tosave = report.time + "," + report.device + "," + report.lon + "," + report.lat + "," + report.mode + "," + report.eps + "," + report.epx + "," + report.epy + "," + report.epv + "," + report.speed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "\n"
     f = open(logfilename + '.nickgps', 'a') #create a file using the given input
     f.write(tosave)
     f.close()
+    GPIO.output(13,False) ## Turn on GPIO pin 7
+    input_state = GPIO.input(16)
+    if input_state == False:
+        restart()

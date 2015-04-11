@@ -3,7 +3,7 @@ import time
 
 
 def restart():
-    command = "/usr/bin/sudo /sbin/shutdown -r now"
+    command = "/usr/bin/sudo /sbin/halt"
     import subprocess
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
@@ -12,9 +12,9 @@ def restart():
 
 GPIO.setmode(GPIO.BOARD)
 
-GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 while True:
-    input_state = GPIO.input(16)
+    input_state = GPIO.input(13)
     if input_state == False:
         restart()
