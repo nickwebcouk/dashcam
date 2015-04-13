@@ -1,6 +1,4 @@
 #!/usr/bin/python
-# touchv7
-# Texy 5/2/2014
 
 import pygame, sys, os, time, math, datetime, gps
 import RPi.GPIO as GPIO ## Import GPIO library
@@ -11,16 +9,9 @@ from ctypes import c_short
 from LSM9DS0 import *
 
 
-def restart():
-    command = "/usr/bin/sudo /sbin/halt"
-    import subprocess
-    process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
-    output = process.communicate()[0]
-    print output
-
 GPIO.setmode(GPIO.BOARD) ## Use board pin numbering
 GPIO.setup(13, GPIO.OUT) ## Setup GPIO Pin 7 to OUT
-GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
 
 
 logfilename = "/home/pi/pidashcam/logs/" + time.strftime("%Y%m%d-%H%M%S")
@@ -401,6 +392,3 @@ while running:
     f.write(tosave)
     f.close()
     GPIO.output(13,False) ## Turn on GPIO pin 7
-    input_state = GPIO.input(16)
-    if input_state == False:
-        restart()
