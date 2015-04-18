@@ -174,16 +174,17 @@ speed = 0
 displayspeed = 0
 running = True
 
-report.time = None
-report.device = None
-report.lon = None
-report.lat = None
-report.mode = None
-report.eps = None
-report.epx = None
-report.epy = None
-report.epv = None
-report.speed = None
+report.epv = str("NA")
+report.time = str("NA")
+report.device = str("NA")
+report.lon = str("NA")
+report.lat = str("NA")
+report.mode = str("NA")
+report.eps = str("NA")
+report.epx = str("NA")
+report.epy = str("NA")
+report.epv = str("NA")
+report.speed = str("NA")
 
 
 # run the game loop
@@ -233,17 +234,18 @@ while running:
             report.speed = str(report.speed)
         else:
             report.speed = str("ERROR 1")
-    #else:
-#        report.time = str("ERROR 2")
-#        report.device = str("ERROR 2")
-#        report.lon = str("ERROR 2")
-#        report.lat = str("ERROR 2")
-#        report.mode = str("ERROR 2")
-#        report.eps = str("ERROR 2")
-#        report.epx = str("ERROR 2")
-#        report.epy = str("ERROR 2")
-#        report.epv = str("ERROR 2")
-#        report.speed = str("ERROR 2")
+    else:
+        report.epv = str("ERROR 2")
+        report.time = str("ERROR 2")
+        report.device = str("ERROR 2")
+        report.lon = str("ERROR 2")
+        report.lat = str("ERROR 2")
+        report.mode = str("ERROR 2")
+        report.eps = str("ERROR 2")
+        report.epx = str("ERROR 2")
+        report.epy = str("ERROR 2")
+        report.epv = str("ERROR 2")
+        report.speed = str("ERROR 2")
     speed = speed + 1
     # background.fill(BLACK)
     # Display some text
