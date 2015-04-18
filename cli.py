@@ -175,21 +175,20 @@ displayspeed = 0
 running = True
 
 
-
 # run the game loop
 
 while running:
     report = session.next()
-    report.time = 0
-    report.device = 0
-    report.lon = 0
-    report.lat = 0
-    report.mode = 0
-    report.eps = 0
-    report.epx = 0
-    report.epy = 0
-    report.epv = 0
-    report.speed = 0
+    report.time = str("0")
+    report.device = str("0")
+    report.lon = str("0")
+    report.lat = str("0")
+    report.mode = str("0")
+    report.eps = str("0")
+    report.epx = str("0")
+    report.epy = str("0")
+    report.epv = str("0")
+    report.speed = str("0")
     if report['class'] == 'TPV':
         if hasattr(report, 'time'):
             report.time = str(report.time)
