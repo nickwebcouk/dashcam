@@ -173,7 +173,7 @@ box = pygame.draw.rect(background, BLACK, (0, 0, 128, 160))
 speed = 0
 displayspeed = 0
 running = True
-
+report = session.next()
 report.epv = str("NA")
 report.time = str("NA")
 report.device = str("NA")
@@ -190,7 +190,6 @@ report.speed = str("NA")
 # run the game loop
 
 while running:
-    report = session.next()
     if report['class'] == 'TPV':
         if hasattr(report, 'time'):
             report.time = str(report.time)
