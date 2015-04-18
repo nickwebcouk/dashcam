@@ -235,17 +235,17 @@ while running:
         else:
             report.speed = str("ERROR 1")
     else:
-        report.epv = str("ERROR 2")
-        report.time = str("ERROR 2")
-        report.device = str("ERROR 2")
-        report.lon = str("ERROR 2")
-        report.lat = str("ERROR 2")
-        report.mode = str("ERROR 2")
-        report.eps = str("ERROR 2")
-        report.epx = str("ERROR 2")
-        report.epy = str("ERROR 2")
-        report.epv = str("ERROR 2")
-        report.speed = str("ERROR 2")
+        #report.epv = str("ERROR 2")
+        #report.time = str("ERROR 2")
+        #report.device = str("ERROR 2")
+        #report.lon = str("ERROR 2")
+        #report.lat = str("ERROR 2")
+        #report.mode = str("ERROR 2")
+        #report.eps = str("ERROR 2")
+        #report.epx = str("ERROR 2")
+        #report.epy = str("ERROR 2")
+        #report.epv = str("ERROR 2")
+        #report.speed = str("ERROR 2")
     speed = speed + 1
     # background.fill(BLACK)
     # Display some text
