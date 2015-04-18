@@ -234,7 +234,7 @@ while running:
             report.speed = str(report.speed)
         else:
             report.speed = str("ERROR 1")
-    else:
+    #else:
         #report.epv = str("ERROR 2")
         #report.time = str("ERROR 2")
         #report.device = str("ERROR 2")
