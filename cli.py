@@ -173,6 +173,19 @@ box = pygame.draw.rect(background, BLACK, (0, 0, 128, 160))
 speed = 0
 displayspeed = 0
 running = True
+
+report.time = str("0")
+report.device = str("0")
+report.lon = str("0")
+report.lat = str("0")
+report.mode = str("0")
+report.eps = str("0")
+report.epx = str("0")
+report.epy = str("0")
+report.epv = str("0")
+report.speed = str("0")
+
+
 # run the game loop
 
 while running:
@@ -220,17 +233,17 @@ while running:
             report.speed = str(report.speed)
         else:
             report.speed = str("ERROR 1")
-    else:
-        report.time = str("ERROR 2")
-        report.device = str("ERROR 2")
-        report.lon = str("ERROR 2")
-        report.lat = str("ERROR 2")
-        report.mode = str("ERROR 2")
-        report.eps = str("ERROR 2")
-        report.epx = str("ERROR 2")
-        report.epy = str("ERROR 2")
-        report.epv = str("ERROR 2")
-        report.speed = str("ERROR 2")
+    #else:
+#        report.time = str("ERROR 2")
+#        report.device = str("ERROR 2")
+#        report.lon = str("ERROR 2")
+#        report.lat = str("ERROR 2")
+#        report.mode = str("ERROR 2")
+#        report.eps = str("ERROR 2")
+#        report.epx = str("ERROR 2")
+#        report.epy = str("ERROR 2")
+#        report.epv = str("ERROR 2")
+#        report.speed = str("ERROR 2")
     speed = speed + 1
     # background.fill(BLACK)
     # Display some text
