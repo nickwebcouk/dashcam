@@ -237,7 +237,10 @@ while running:
         else:
             report.speed = str("ERROR 1")
     else:
-        report.time = timesave
+        if report.time == None:
+            report.time = str("ERROR 2")
+        else:
+            report.time = timesave
         report.epv = str("ERROR 2")
         report.time = str("ERROR 2")
         report.device = str("ERROR 2")
