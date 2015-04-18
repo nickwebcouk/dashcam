@@ -174,6 +174,7 @@ speed = 0
 displayspeed = 0
 running = True
 # run the game loop
+import pdb; pdb.set_trace()
 while running:
     report = session.next()
     if report['class'] == 'TPV':
