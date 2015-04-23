@@ -13,6 +13,7 @@ from time import strftime, gmtime, sleep
 from smbus import SMBus
 from ctypes import c_short
 from LSM9DS0 import *
+import threading
 
 
 GPIO.setmode(GPIO.BOARD)  # Use board pin numbering
