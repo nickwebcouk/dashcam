@@ -374,6 +374,27 @@ if __name__ == '__main__':
             # GPS SPEED            GYRO ACC X           GYRO ACC Y           GYRO K X
             # GYRO K Y             GYRO HEAD            TEMP           PRESS
             # DEVICE TIME
+            savedatatime = str(savedatatime)
+            savedatadevice = str(savedatadevice)
+            savedatalon = str(savedatalon)
+            savedatalat = str(savedatalat)
+            savedatamode = str(savedatamode)
+            savedataeps = str(savedataeps)
+            savedataepx = str(savedataepx)
+            savedataepy = str(savedataepy)
+            savedataepv = str(savedataepv)
+            savedataspeed = str(savedataspeed)
+            textaccxsave = str(textaccxsave)
+            textaccysave = str(textaccysave)
+            textcfaxsave = str(textcfaxsave)
+            textcfaysave = str(textcfaysave)
+            textheadsave = str(textheadsave)
+            currenttime = str(currenttime)
+            savedataclimb = str(savedataclimb)
+            savedatatrack = str(savedatatrack)
+            savedatamode = str(savedatamode)
+            savedatasats = str(savedatasats)
+
             print savedatatime + "," + savedatadevice + "," + savedatalon + "," + savedatalat + "," + savedatamode + "," + savedataeps + "," + savedataepx + "," + savedataepy + "," + savedataepv + "," + savedataspeed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + savedataclimb + "," + savedatatrack + "," + savedatamode + "," + savedatasats + "\n"
             # create a file using the given input
             f = open(logfilename + '.nickgps', 'a')
