@@ -196,26 +196,27 @@ if __name__ == '__main__':
         gpsp.start() # start it up
 
         while True:
-            report.lat = gpsd.fix.latitude
-            report.lon = gpsd.fix.longitude
-            report.timeutc = gpsd.utc
-            report.timefix = gpsd.fix.time
-            report.altitude  = gpsd.fix.altitude
-            report.eps = gpsd.fix.eps
-            report.epx = gpsd.fix.epx
-            report.epy = gpsd.fix.epv
-            report.epv = gpsd.fix.ept
-            report.speed = gpsd.fix.speed
-            report.climb = gpsd.fix.climb
-            report.track = gpsd.fix.track
-            report.mode = gpsd.fix.mode
-            report.sats = gpsd.satellites
+            savedatadevice = "Unknown"
+            savedatalat = gpsd.fix.latitude
+            savedatalon = gpsd.fix.longitude
+            savedatatimeutc = gpsd.utc
+            savedatatimefix = gpsd.fix.time
+            savedataaltitude  = gpsd.fix.altitude
+            savedataeps = gpsd.fix.eps
+            savedataepx = gpsd.fix.epx
+            savedataepy = gpsd.fix.epv
+            savedataepv = gpsd.fix.ept
+            savedataspeed = gpsd.fix.speed
+            savedataclimb = gpsd.fix.climb
+            savedatatrack = gpsd.fix.track
+            savedatamode = gpsd.fix.mode
+            savedatasats = gpsd.satellites
 
             speed = speed + 1
             background.fill(BLACK)
             # Display some text
             font = pygame.font.Font("/home/pi/pidashcam/bold.ttf", 72)
-            displayspeed = report.speed
+            displayspeed = savedataspeed
             text = font.render(displayspeed, 1, (WHITE))
             textpos = text.get_rect(centerx=background.get_width() / 2, centery=26)
             background.blit(text, textpos)
@@ -375,7 +376,7 @@ if __name__ == '__main__':
             # GPS SPEED            GYRO ACC X           GYRO ACC Y           GYRO K X
             # GYRO K Y             GYRO HEAD            TEMP           PRESS
             # DEVICE TIME
-            tosave = report.time + "," + report.device + "," + report.lon + "," + report.lat + "," + report.mode + "," + report.eps + "," + report.epx + "," + report.epy + "," + report.epv + "," + report.speed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + report.climb +"," + gpsd.fix.climb + "," + report.track + "," + gpsd.fix.track + "," + report.mode + "," + gpsd.fix.mode + "," + report.sats + "\n"
+            tosave = savedatatime + "," + savedatadevice + "," + savedatalon + "," + savedatalat + "," + savedatamode + "," + savedataeps + "," + savedataepx + "," + savedataepy + "," + savedataepv + "," + savedataspeed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + savedataclimb +"," + gpsd.fix.climb + "," + savedatatrack + "," + gpsd.fix.track + "," + savedatamode + "," + gpsd.fix.mode + "," + savedatasats + "\n"
             # create a file using the given input
             f = open(logfilename + '.nickgps', 'a')
             f.write(tosave)
