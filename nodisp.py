@@ -149,7 +149,7 @@ os.environ["SDL_FBDEV"] = "/dev/fb1"
 
 speed = 0
 displayspeed = 0
-import pdb; pdb.set_trace()
+#import pdb; pdb.set_trace()
 class GpsPoller(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
@@ -325,12 +325,12 @@ if __name__ == '__main__':
             textcfaxhelper = "{:.2f}".format(CFangleX)
             textcfayhelper = "{:.2f}".format(CFangleY)
             textheadhelper = "{:.0f}".format(heading)
-            font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 12)
-            textaccx = font.render("AX:" + str(textaccxhelper), 1, (WHITE))
-            textaccy = font.render("AY:" + str(textaccyhelper), 1, (WHITE))
-            textcfax = font.render("CX:" + str(textcfaxhelper), 1, (WHITE))
-            textcfay = font.render("CY:" + str(textcfayhelper), 1, (WHITE))
-            texthead = font.render("HD:" + str(textheadhelper), 1, (WHITE))
+            # font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 12)
+            #textaccx = font.render("AX:" + str(textaccxhelper), 1, (WHITE))
+            #textaccy = font.render("AY:" + str(textaccyhelper), 1, (WHITE))
+            #textcfax = font.render("CX:" + str(textcfaxhelper), 1, (WHITE))
+            #textcfay = font.render("CY:" + str(textcfayhelper), 1, (WHITE))
+            #texthead = font.render("HD:" + str(textheadhelper), 1, (WHITE))
 
             #screen.blit(textaccx, (5, 114))
             #screen.blit(textaccy, (5, 128))
