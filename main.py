@@ -28,20 +28,6 @@ gpsd = None #seting the global variable
 
 os.system('clear') #clear the terminal (optional)
 
-class GpsPoller(threading.Thread):
-    def __init__(self):
-        threading.Thread.__init__(self)
-        global gpsd #bring it in scope
-        gpsd = gps("localhost", "2947")
-        gpsd = gps(mode=WATCH_ENABLE) #starting the stream of info
-        self.current_value = None
-        self.running = True #setting the thread running to true
-
-    def run(self):
-        global gpsd
-        while gpsp.running:
-          gpsd.next() #this will continue to loop and grab EACH set of gpsd info to clear the buffer
-
 RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
 # [deg/s/LSB]  If you change the dps for gyro, you need to update this value accordingly
@@ -189,7 +175,20 @@ box = pygame.draw.rect(background, BLACK, (0, 0, 128, 160))
 speed = 0
 displayspeed = 0
 
-# run the game loop
+class GpsPoller(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        global gpsd #bring it in scope
+        gpsd = gps("localhost", "2947")
+        gpsd = gps(mode=WATCH_ENABLE) #starting the stream of info
+        self.current_value = None
+        self.running = True #setting the thread running to true
+
+    def run(self):
+        global gpsd
+        while gpsp.running:
+          gpsd.next() #this will continue to loop and grab EACH set of gpsd info to clear the buffer
+
 if __name__ == '__main__':
     gpsp = GpsPoller() # create the thread
     try:
