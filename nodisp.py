@@ -397,9 +397,9 @@ if __name__ == '__main__':
 
             print savedatatime + "," + savedatadevice + "," + savedatalon + "," + savedatalat + "," + savedatamode + "," + savedataeps + "," + savedataepx + "," + savedataepy + "," + savedataepv + "," + savedataspeed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + savedataclimb + "," + savedatatrack + "," + savedatamode + "," + savedatasats + "\n"
             # create a file using the given input
-            f = open(logfilename + '.nickgps', 'a')
-            f.write(tosave)
-            f.close()
+            #f = open(logfilename + '.nickgps', 'a')
+            #f.write(tosave)
+            #f.close()
             GPIO.output(13, False)  # Turn on GPIO pin 7
 
     except (KeyboardInterrupt, SystemExit): #when you press ctrl+c
