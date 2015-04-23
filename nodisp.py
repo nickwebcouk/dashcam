@@ -187,7 +187,7 @@ if __name__ == '__main__':
             savedatasats = gpsd.satellites
 
             speed = speed + 1
-            background.fill(BLACK)
+            #background.fill(BLACK)
             # Display some text
             #font = pygame.font.Font("/home/pi/pidashcam/bold.ttf", 72)
             #displayspeed = savedataspeed
