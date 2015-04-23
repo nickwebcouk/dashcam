@@ -194,7 +194,7 @@ if __name__ == '__main__':
   try:
     gpsp.start() # start it up
 
-        while True:
+    while True:
         report.lat = gpsd.fix.latitude
         report.lon = gpsd.fix.longitude
         report.timeutc = gpsd.utc
