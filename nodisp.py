@@ -209,7 +209,7 @@ if __name__ == '__main__':
             savedatatrack = gpsd.fix.track
             savedatamode = gpsd.fix.mode
             savedatasats = gpsd.satellites
-
+            savedatasats = len(savedatasats)
             speed = speed + 1
             #background.fill(BLACK)
             # Display some text
