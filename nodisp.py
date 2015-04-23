@@ -149,6 +149,30 @@ os.environ["SDL_FBDEV"] = "/dev/fb1"
 
 speed = 0
 displayspeed = 0
+
+savedatatime = "None"
+savedatadevice = "None"
+savedatalon = "None"
+savedatalat = "None"
+savedatamode = "None"
+savedataeps = "None"
+savedataepx = "None"
+savedataepy = "None"
+savedataepv = "None"
+savedataspeed = "None"
+textaccxsave = "None"
+textaccysave = "None"
+textcfaxsave = "None"
+textcfaysave = "None"
+textheadsave = "None"
+currenttime = "None"
+savedataclimb = "None"
+savedatatrack = "None"
+savedatamode = "None"
+savedatasats = "None"
+
+
+
 #import pdb; pdb.set_trace()
 class GpsPoller(threading.Thread):
     def __init__(self):
@@ -350,7 +374,7 @@ if __name__ == '__main__':
             # GPS SPEED            GYRO ACC X           GYRO ACC Y           GYRO K X
             # GYRO K Y             GYRO HEAD            TEMP           PRESS
             # DEVICE TIME
-            print savedatatime + "," + savedatadevice + "," + savedatalon + "," + savedatalat + "," + savedatamode + "," + savedataeps + "," + savedataepx + "," + savedataepy + "," + savedataepv + "," + savedataspeed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + savedataclimb +"," + gpsd.fix.climb + "," + savedatatrack + "," + gpsd.fix.track + "," + savedatamode + "," + gpsd.fix.mode + "," + savedatasats + "\n"
+            print savedatatime + "," + savedatadevice + "," + savedatalon + "," + savedatalat + "," + savedatamode + "," + savedataeps + "," + savedataepx + "," + savedataepy + "," + savedataepv + "," + savedataspeed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + savedataclimb + "," + savedatatrack + "," + savedatamode + "," + savedatasats + "\n"
             # create a file using the given input
             f = open(logfilename + '.nickgps', 'a')
             f.write(tosave)
