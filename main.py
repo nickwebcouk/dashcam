@@ -374,7 +374,7 @@ if __name__ == '__main__':
         # GPS SPEED            GYRO ACC X           GYRO ACC Y           GYRO K X
         # GYRO K Y             GYRO HEAD            TEMP           PRESS
         # DEVICE TIME
-        tosave = report.time + "," + report.device + "," + report.lon + "," + report.lat + "," + report.mode + "," + report.eps + "," + report.epx + "," + report.epy + "," + report.epv + "," + report.speed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + report.climb +"," + gpsd.fix.climb + "," + report.track + "," + gpsd.fix.track + "," + report.mode gpsd.fix.mode + "," + report.sats + "\n"
+        tosave = report.time + "," + report.device + "," + report.lon + "," + report.lat + "," + report.mode + "," + report.eps + "," + report.epx + "," + report.epy + "," + report.epv + "," + report.speed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + report.climb +"," + gpsd.fix.climb + "," + report.track + "," + gpsd.fix.track + "," + report.mode + "," + gpsd.fix.mode + "," + report.sats + "\n"
         # create a file using the given input
         f = open(logfilename + '.nickgps', 'a')
         f.write(tosave)
