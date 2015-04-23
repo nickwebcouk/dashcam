@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import pdb; pdb.set_trace()
+
 import pygame
 import sys
 import os
@@ -175,7 +175,7 @@ box = pygame.draw.rect(background, BLACK, (0, 0, 128, 160))
 
 speed = 0
 displayspeed = 0
-
+import pdb; pdb.set_trace()
 class GpsPoller(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
