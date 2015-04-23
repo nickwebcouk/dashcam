@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+import pdb; pdb.set_trace()
 import pygame
 import sys
 import os
@@ -376,7 +376,7 @@ if __name__ == '__main__':
             # GPS SPEED            GYRO ACC X           GYRO ACC Y           GYRO K X
             # GYRO K Y             GYRO HEAD            TEMP           PRESS
             # DEVICE TIME
-            tosave = savedatatime + "," + savedatadevice + "," + savedatalon + "," + savedatalat + "," + savedatamode + "," + savedataeps + "," + savedataepx + "," + savedataepy + "," + savedataepv + "," + savedataspeed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + savedataclimb +"," + gpsd.fix.climb + "," + savedatatrack + "," + gpsd.fix.track + "," + savedatamode + "," + gpsd.fix.mode + "," + savedatasats + "\n"
+            print savedatatime + "," + savedatadevice + "," + savedatalon + "," + savedatalat + "," + savedatamode + "," + savedataeps + "," + savedataepx + "," + savedataepy + "," + savedataepv + "," + savedataspeed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + savedataclimb +"," + gpsd.fix.climb + "," + savedatatrack + "," + gpsd.fix.track + "," + savedatamode + "," + gpsd.fix.mode + "," + savedatasats + "\n"
             # create a file using the given input
             f = open(logfilename + '.nickgps', 'a')
             f.write(tosave)
