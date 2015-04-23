@@ -1,5 +1,14 @@
 #!/usr/bin/python
 
+# TODO
+# 1) Remove extra code to a seperate file
+# 2) Time loop to assist with BMP180 readings
+# 3) Fix variable names, add in string creating sections ONLY before writing to file/screen
+# 3) Add in pygame code to get screen update again
+# 3) Hook up GPS to Windows to check baud speed and transmission rates etc
+
+
+ 
 import pygame
 import sys
 import os
