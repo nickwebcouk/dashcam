@@ -199,16 +199,16 @@ if __name__ == '__main__':
         report.lon = gpsd.fix.longitude
         report.timeutc = gpsd.utc
         report.timefix = gpsd.fix.time
-        report.altitude  gpsd.fix.altitude
-        report.eps gpsd.fix.eps
-        report.epx gpsd.fix.epx
-        report.epy gpsd.fix.epv
-        report.epv gpsd.fix.ept
-        report.speed gpsd.fix.speed
-        report.climb gpsd.fix.climb
-        report.track gpsd.fix.track
-        report.mode gpsd.fix.mode
-        report.sats gpsd.satellites
+        report.altitude  = gpsd.fix.altitude
+        report.eps = gpsd.fix.eps
+        report.epx = gpsd.fix.epx
+        report.epy = gpsd.fix.epv
+        report.epv = gpsd.fix.ept
+        report.speed = gpsd.fix.speed
+        report.climb = gpsd.fix.climb
+        report.track = gpsd.fix.track
+        report.mode = gpsd.fix.mode
+        report.sats = gpsd.satellites
 
         speed = speed + 1
         background.fill(BLACK)
