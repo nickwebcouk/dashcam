@@ -3,10 +3,11 @@
 import pygame
 import sys
 import os
+from gps import *
+from time import *
 import time
 import math
 import datetime
-import gps
 import RPi.GPIO as GPIO  # Import GPIO library
 from pygame.locals import *
 from time import strftime, gmtime, sleep
