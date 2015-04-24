@@ -24,7 +24,7 @@ from smbus import SMBus
 from ctypes import c_short
 from LSM9DS0 import *
 import threading
-from pidashinc import *
+include('pidashinc.py')
 
 
 GPIO.setmode(GPIO.BOARD)  # Use board pin numbering
