@@ -437,6 +437,7 @@ if __name__ == '__main__':
             text = font.render(displayspeed, 1, (WHITE))
             textpos = text.get_rect(centerx=background.get_width() / 2, centery=26)
             background.blit(text, textpos)
+            screen.blit(background, (0, 0))
             pygame.display.flip()
             ###
             #print 'Loop Time', time.time()-start, 'seconds.'
