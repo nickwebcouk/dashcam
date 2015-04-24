@@ -7,8 +7,6 @@ from pygame.locals import *
 
 
 os.environ["SDL_FBDEV"] = "/dev/fb1"
-os.environ["SDL_MOUSEDRV"] = "TSLIB"
-os.environ["SDL_MOUSEDEV"] = eventX
 
 pygame.init()
 
