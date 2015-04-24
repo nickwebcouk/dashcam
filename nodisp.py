@@ -420,25 +420,96 @@ if __name__ == '__main__':
             savedatamode = str(savedatamode)
             savedatasats = str(savedatasats)
 
-            #Set what should be shown on the display here.
 
 
+            # Save all raw data to a log file first, then update the screen
             tosave = savedatatime + "," + savedatadevice + "," + savedatalon + "," + savedatalat + "," + savedatamode + "," + savedataeps + "," + savedataepx + "," + savedataepy + "," + savedataepv + "," + savedataspeed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + savedataclimb + "," + savedatatrack + "," + savedatamode + "," + savedatasats + "\n"
             print tosave
             #create a file using the given input
             f = open(logfilename + '.nickgps', 'a')
             f.write(tosave)
             f.close()
-            GPIO.output(13, False)  # Turn on GPIO pin 7
+            GPIO.output(13, False)  # Turn off GPIO pin 7
 
-            # Display some text
+            # Change any variables to nice displays etc...
+            textaccxsave = int(textaccxsave)
+            textaccysave = int(textaccysave)
+            textcfaxsave = int(textcfaxsave)
+            textcfaysave = int(textcfaysave)
+            displaygpsspeed = savedataspeed * 0.621371
+            displaygpsspeed = str(displaygpsspeed)
+            displaytemp = "Temp:" + str(t) + "C"
+            displaypres = "Pres:" + str(p) + "hPa"
+            displayaccx = "{:.2f}".format(textaccxsave)
+            displayaccy = "{:.2f}".format(textaccysave)
+            displaycfax = "{:.2f}".format(textcfaxsave)
+            displaycfay = "{:.2f}".format(textcfaysave)
+            displayaccx = str()
+            displayaccy = str()
+            displaycfax = str()
+            displaycfay = str()
+
+            # Set up what to show on screen
+
+            # -----SPEED (VARIABLE)-----
             font = pygame.font.Font("/home/pi/pidashcam/bold.ttf", 72)
-            displayspeed = "Hi"
-            text = font.render(displayspeed, 1, (WHITE))
+            speedtext = font.render(displaygpsspeed, 1, (WHITE))
             textpos = text.get_rect(centerx=background.get_width() / 2, centery=26)
+
+            # -----MPH (STATIC TEXT)-----
+            font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 14)
+            mphtext = font.render("MPH", 1, (WHITE))
+            textpos = text.get_rect(centerx=background.get_width() / 2, centery=65)
+
+
+            # -----TIME (VARIABLE)-----
+            font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 14)
+            currenttime = time.strftime("%H:%M:%S", gmtime())
+            gmttext = " GMT"
+            currenttime = currenttime + gmttext
+            currenttimetext = font.render(currenttime, 1, (WHITE))
+            textpos = text.get_rect(centerx=background.get_width() / 2, centery=80)
+
+
+            # -----TEMP & PRESSURE (VARIABLE)-----
+            font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 12)
+            temptext = font.render(displaytemp, 1, (WHITE))
+            prestext = font.render(displaypres, 1, (WHITE))
+            #textpos = text.get_rect(centerx=60,centery=90)
+            #background.blit(text, textpos)
+            screen.blit(temptext, (5, 90))
+            screen.blit(prestext, (5, 102))
+            pygame.display.flip()
+            screen.blit(background, (0, 0))
+
+            # -----GYRO READINGS (VARIABLE)-----
+
+            font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 12)
+            textaccx = font.render("AX:" + str(textaccxhelper), 1, (WHITE))
+            textaccy = font.render("AY:" + str(textaccyhelper), 1, (WHITE))
+            textcfax = font.render("CX:" + str(textcfaxhelper), 1, (WHITE))
+            textcfay = font.render("CY:" + str(textcfayhelper), 1, (WHITE))
+            texthead = font.render("HD:" + str(textheadhelper), 1, (WHITE))
+
+            screen.blit(textaccx, (5, 114))
+            screen.blit(textaccy, (5, 128))
+            screen.blit(textcfax, (70, 114))
+            screen.blit(textcfay, (70, 128))
+            screen.blit(texthead, (5, 142))
+            background.blit(text, textpos)
+
+            textaccxsave = textaccxhelper
+            textaccysave = textaccyhelper
+            textcfaxsave = textcfaxhelper
+            textcfaysave = textcfayhelper
+            textheadsave = textheadhelper
+
+            # -----PERFORM SCREEN UPDATES HERE-----
+
             background.blit(text, textpos)
             screen.blit(background, (0, 0))
             pygame.display.flip()
+
             ###
             #print 'Loop Time', time.time()-start, 'seconds.'
             #loopsecs = loopsecs + time.time()-start
