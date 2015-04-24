@@ -25,7 +25,7 @@ from ctypes import c_short
 from LSM9DS0 import *
 import threading
 
-start = time.time()
+
 
 GPIO.setmode(GPIO.BOARD)  # Use board pin numbering
 GPIO.setup(13, GPIO.OUT)  # Setup GPIO Pin 7 to OUT
@@ -199,6 +199,7 @@ if __name__ == '__main__':
         gpsp.start() # start it up
 
         while True:
+            start = time.time()
             savedatadevice = "Unknown"
             savedatalat = gpsd.fix.latitude
             savedatalon = gpsd.fix.longitude
