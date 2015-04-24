@@ -40,9 +40,8 @@ RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
 # [deg/s/LSB]  If you change the dps for gyro, you need to update this value accordingly
 G_GAIN = 0.070
-# Loop period = 41ms.   This needs to match the time it takes each loop to run
-LP = 0.040
-AA = 0.90      # Complementary filter constant
+LP = 0.068      # Loop period
+AA = 0.90       # Complementary filter constant
 
 def writeACC(register, value):
     bus.write_byte_data(ACC_ADDRESS, register, value)
@@ -152,6 +151,25 @@ CFangleX = 0.0
 CFangleY = 0.0
 
 os.environ["SDL_FBDEV"] = "/dev/fb1"
+pygame.init()
+screen = pygame.display.set_mode((128, 160), 0, 32)
+pygame.display.set_caption('Drawing')
+pygame.mouse.set_visible(0)
+# set up the colors
+BLACK = (0,   0,   0)
+WHITE = (255, 255, 255)
+RED = (255,   0,   0)
+GREEN = (0, 255,   0)
+BLUE = (0,   0, 255)
+CYAN = (0, 255, 255)
+MAGENTA = (255,   0, 255)
+YELLOW = (255, 255,   0)
+background = pygame.Surface(screen.get_size())
+background = background.convert()
+background.fill(WHITE)
+box = pygame.draw.rect(background, BLACK, (0, 0, 128, 160))
+
+
 
 speed = 0
 displayspeed = 0
@@ -402,6 +420,9 @@ if __name__ == '__main__':
             savedatamode = str(savedatamode)
             savedatasats = str(savedatasats)
 
+            #Set what should be shown on the display here.
+
+
             tosave = savedatatime + "," + savedatadevice + "," + savedatalon + "," + savedatalat + "," + savedatamode + "," + savedataeps + "," + savedataepx + "," + savedataepy + "," + savedataepv + "," + savedataspeed + "," + textaccxsave + "," + textaccysave + "," + textcfaxsave + "," + textcfaysave + "," + textheadsave + "," + str(t) + "," + str(p) + "," + currenttime + "," + savedataclimb + "," + savedatatrack + "," + savedatamode + "," + savedatasats + "\n"
             print tosave
             #create a file using the given input
@@ -410,10 +431,12 @@ if __name__ == '__main__':
             f.close()
             GPIO.output(13, False)  # Turn on GPIO pin 7
 
-            print 'Loop Time', time.time()-start, 'seconds.'
-            loopsecs = loopsecs + time.time()-start
-            counter = counter + 1
-            print 'Average = ', loopsecs/counter, 'seconds.'
+            ###
+            #print 'Loop Time', time.time()-start, 'seconds.'
+            #loopsecs = loopsecs + time.time()-start
+            #counter = counter + 1
+            #print 'Average = ', loopsecs/counter, 'seconds.'
+            ###
 
     except (KeyboardInterrupt, SystemExit): #when you press ctrl+c
         print "\nKilling Thread..."
