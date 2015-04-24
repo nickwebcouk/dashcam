@@ -24,6 +24,13 @@ from smbus import SMBus
 from ctypes import c_short
 from LSM9DS0 import *
 import threading
+
+
+def include(filename):
+    if os.path.exists(filename):
+        execfile(filename)
+
+
 include('pidashinc.py')
 
 
