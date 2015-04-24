@@ -168,15 +168,8 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill(WHITE)
 box = pygame.draw.rect(background, BLACK, (0, 0, 128, 160))
-
 background.fill(BLACK)
-# Display some text
-font = pygame.font.Font("/home/pi/pidashcam/bold.ttf", 72)
-displayspeed = "Hi"
-text = font.render(displayspeed, 1, (WHITE))
-textpos = text.get_rect(centerx=background.get_width() / 2, centery=26)
-background.blit(text, textpos)
-pygame.display.flip()
+
 
 speed = 0
 displayspeed = 0
@@ -438,6 +431,13 @@ if __name__ == '__main__':
             f.close()
             GPIO.output(13, False)  # Turn on GPIO pin 7
 
+            # Display some text
+            font = pygame.font.Font("/home/pi/pidashcam/bold.ttf", 72)
+            displayspeed = "Hi"
+            text = font.render(displayspeed, 1, (WHITE))
+            textpos = text.get_rect(centerx=background.get_width() / 2, centery=26)
+            background.blit(text, textpos)
+            pygame.display.flip()
             ###
             #print 'Loop Time', time.time()-start, 'seconds.'
             #loopsecs = loopsecs + time.time()-start
