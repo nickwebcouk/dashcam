@@ -25,7 +25,8 @@ from ctypes import c_short
 from LSM9DS0 import *
 import threading
 
-
+loopsecs = 0
+counter = 0
 
 GPIO.setmode(GPIO.BOARD)  # Use board pin numbering
 GPIO.setup(13, GPIO.OUT)  # Setup GPIO Pin 7 to OUT
@@ -410,6 +411,9 @@ if __name__ == '__main__':
             GPIO.output(13, False)  # Turn on GPIO pin 7
 
             print 'Loop Time', time.time()-start, 'seconds.'
+            loopsecs = loopsecs + time.time()-start
+            counter = counter + 1
+            print 'Average = ', loopsecs/counter, 'seconds.'
 
     except (KeyboardInterrupt, SystemExit): #when you press ctrl+c
         print "\nKilling Thread..."
