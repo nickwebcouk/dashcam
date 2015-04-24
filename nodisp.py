@@ -177,7 +177,6 @@ text = font.render(displayspeed, 1, (WHITE))
 textpos = text.get_rect(centerx=background.get_width() / 2, centery=26)
 background.blit(text, textpos)
 pygame.display.flip()
-screen.blit(background, (0, 0))
 
 speed = 0
 displayspeed = 0
