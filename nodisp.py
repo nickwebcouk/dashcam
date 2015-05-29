@@ -454,24 +454,24 @@ if __name__ == '__main__':
             # -----SPEED (VARIABLE)-----
             font = pygame.font.Font("/home/pi/pidashcam/bold.ttf", 72)
             speedtext = font.render(displaygpsspeed, 1, (WHITE))
-            textpos = speedtext.get_rect(centerx=background.get_width() / 2, centery=26)
+            speedtextpos = speedtext.get_rect(centerx=background.get_width() / 2, centery=26)
 
-            background.blit(speedtext, textpos)
+            background.blit(speedtext, speedtextpos)
             # -----MPH (STATIC TEXT)-----
             font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 14)
             mphtext = font.render("MPH", 1, (WHITE))
-            textpos = mphtext.get_rect(centerx=background.get_width() / 2, centery=65)
+            mphtextpos = mphtext.get_rect(centerx=background.get_width() / 2, centery=65)
 
-            background.blit(mphtext, textpos)
+            background.blit(mphtext, mphtextpos)
             # -----TIME (VARIABLE)-----
             font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 14)
             currenttime = time.strftime("%H:%M:%S", gmtime())
             gmttext = " GMT"
             currenttime = currenttime + gmttext
             currenttimetext = font.render(currenttime, 1, (WHITE))
-            textpos = currenttimetext.get_rect(centerx=background.get_width() / 2, centery=80)
+            currenttimetextpos = currenttimetext.get_rect(centerx=background.get_width() / 2, centery=80)
 
-            background.blit(currenttimetext, textpos)
+            background.blit(currenttimetext, currenttimetextpos)
             # -----TEMP & PRESSURE (VARIABLE)-----
             font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 12)
             temptext = font.render(displaytemp, 1, (WHITE))
@@ -491,18 +491,17 @@ if __name__ == '__main__':
             textcfay = font.render("CY:" + str(textcfayhelper), 1, (WHITE))
             texthead = font.render("HD:" + str(textheadhelper), 1, (WHITE))
 
-            background.blit(textaccx, textpos)
-            background.blit(textaccy, textpos)
-            background.blit(textcfax, textpos)
-            background.blit(textcfay, textpos)
-            background.blit(texthead, textpos)
+            #background.blit(textaccx, textpos)
+            #background.blit(textaccy, textpos)
+            #background.blit(textcfax, textpos)
+            #background.blit(textcfay, textpos)
+            #background.blit(texthead, textpos)
             screen.blit(textaccx, (5, 114))
             screen.blit(textaccy, (5, 128))
             screen.blit(textcfax, (70, 114))
             screen.blit(textcfay, (70, 128))
             screen.blit(texthead, (5, 142))
-            pygame.display.flip()
-            screen.blit(background, (0, 0))
+
 
             textaccxsave = textaccxhelper
             textaccysave = textaccyhelper
@@ -516,6 +515,9 @@ if __name__ == '__main__':
             #screen.blit(background, (0, 0))
             #pygame.display.flip()
 
+
+            pygame.display.flip()
+            screen.blit(background, (0, 0))
             ###
             #print 'Loop Time', time.time()-start, 'seconds.'
             #loopsecs = loopsecs + time.time()-start
