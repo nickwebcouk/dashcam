@@ -432,10 +432,10 @@ if __name__ == '__main__':
             GPIO.output(13, False)  # Turn off GPIO pin 7
 
             # Change any variables to nice displays etc...
-            textaccxsave = int(textaccxsave)
-            textaccysave = int(textaccysave)
-            textcfaxsave = int(textcfaxsave)
-            textcfaysave = int(textcfaysave)
+            textaccxsave = float(textaccxsave)
+            textaccysave = float(textaccysave)
+            textcfaxsave = float(textcfaxsave)
+            textcfaysave = float(textcfaysave)
             displaygpsspeed = savedataspeed * 0.621371
             displaygpsspeed = str(displaygpsspeed)
             displaytemp = "Temp:" + str(t) + "C"
