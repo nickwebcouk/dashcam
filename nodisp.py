@@ -456,7 +456,7 @@ if __name__ == '__main__':
             speedtext = font.render(displaygpsspeed, 1, (WHITE))
             textpos = speedtext.get_rect(centerx=background.get_width() / 2, centery=26)
 
-            background.blit(text, textpos)
+            background.blit(speedtext, textpos)
             screen.blit(background, (0, 0))
             pygame.display.flip()
             # -----MPH (STATIC TEXT)-----
@@ -464,7 +464,7 @@ if __name__ == '__main__':
             mphtext = font.render("MPH", 1, (WHITE))
             textpos = mphtext.get_rect(centerx=background.get_width() / 2, centery=65)
 
-            background.blit(text, textpos)
+            background.blit(mphtext, textpos)
             screen.blit(background, (0, 0))
             pygame.display.flip()
             # -----TIME (VARIABLE)-----
@@ -473,9 +473,9 @@ if __name__ == '__main__':
             gmttext = " GMT"
             currenttime = currenttime + gmttext
             currenttimetext = font.render(currenttime, 1, (WHITE))
-            textpos = text.get_rect(centerx=background.get_width() / 2, centery=80)
+            textpos = currenttimetext.get_rect(centerx=background.get_width() / 2, centery=80)
 
-            background.blit(text, textpos)
+            background.blit(currenttimetext, textpos)
             screen.blit(background, (0, 0))
             pygame.display.flip()
             # -----TEMP & PRESSURE (VARIABLE)-----
