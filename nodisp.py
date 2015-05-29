@@ -454,7 +454,7 @@ if __name__ == '__main__':
             # -----SPEED (VARIABLE)-----
             font = pygame.font.Font("/home/pi/pidashcam/bold.ttf", 72)
             if displaygpsspeed == "nan":
-                displaygpsspeed = str("0)
+                displaygpsspeed = str("0")
             speedtext = font.render(displaygpsspeed, 1, (WHITE))
             speedtextpos = speedtext.get_rect(centerx=background.get_width() / 2, centery=26)
 
