@@ -168,7 +168,7 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill(WHITE)
 box = pygame.draw.rect(background, BLACK, (0, 0, 128, 160))
-background.fill(BLACK)
+# background.fill(BLACK)
 
 
 speed = 0
@@ -456,12 +456,17 @@ if __name__ == '__main__':
             speedtext = font.render(displaygpsspeed, 1, (WHITE))
             textpos = text.get_rect(centerx=background.get_width() / 2, centery=26)
 
+            background.blit(text, textpos)
+            screen.blit(background, (0, 0))
+            pygame.display.flip()
             # -----MPH (STATIC TEXT)-----
             font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 14)
             mphtext = font.render("MPH", 1, (WHITE))
             textpos = text.get_rect(centerx=background.get_width() / 2, centery=65)
 
-
+            background.blit(text, textpos)
+            screen.blit(background, (0, 0))
+            pygame.display.flip()
             # -----TIME (VARIABLE)-----
             font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 14)
             currenttime = time.strftime("%H:%M:%S", gmtime())
@@ -470,7 +475,9 @@ if __name__ == '__main__':
             currenttimetext = font.render(currenttime, 1, (WHITE))
             textpos = text.get_rect(centerx=background.get_width() / 2, centery=80)
 
-
+            background.blit(text, textpos)
+            screen.blit(background, (0, 0))
+            pygame.display.flip()
             # -----TEMP & PRESSURE (VARIABLE)-----
             font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 12)
             temptext = font.render(displaytemp, 1, (WHITE))
@@ -506,9 +513,9 @@ if __name__ == '__main__':
 
             # -----PERFORM SCREEN UPDATES HERE-----
 
-            background.blit(text, textpos)
-            screen.blit(background, (0, 0))
-            pygame.display.flip()
+            #background.blit(text, textpos)
+            #screen.blit(background, (0, 0))
+            #pygame.display.flip()
 
             ###
             #print 'Loop Time', time.time()-start, 'seconds.'
