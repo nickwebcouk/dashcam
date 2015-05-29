@@ -457,14 +457,12 @@ if __name__ == '__main__':
             textpos = speedtext.get_rect(centerx=background.get_width() / 2, centery=26)
 
             background.blit(speedtext, textpos)
-            pygame.display.flip()
             # -----MPH (STATIC TEXT)-----
             font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 14)
             mphtext = font.render("MPH", 1, (WHITE))
             textpos = mphtext.get_rect(centerx=background.get_width() / 2, centery=65)
 
             background.blit(mphtext, textpos)
-            pygame.display.flip()
             # -----TIME (VARIABLE)-----
             font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 14)
             currenttime = time.strftime("%H:%M:%S", gmtime())
@@ -474,7 +472,6 @@ if __name__ == '__main__':
             textpos = currenttimetext.get_rect(centerx=background.get_width() / 2, centery=80)
 
             background.blit(currenttimetext, textpos)
-            pygame.display.flip()
             # -----TEMP & PRESSURE (VARIABLE)-----
             font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 12)
             temptext = font.render(displaytemp, 1, (WHITE))
@@ -483,7 +480,6 @@ if __name__ == '__main__':
             #background.blit(text, textpos)
             screen.blit(temptext, (5, 90))
             screen.blit(prestext, (5, 102))
-            pygame.display.flip()
 
 
             # -----GYRO READINGS (VARIABLE)-----
@@ -505,8 +501,8 @@ if __name__ == '__main__':
             screen.blit(textcfax, (70, 114))
             screen.blit(textcfay, (70, 128))
             screen.blit(texthead, (5, 142))
-            screen.blit(background, (0, 0))
             pygame.display.flip()
+            screen.blit(background, (0, 0))
 
             textaccxsave = textaccxhelper
             textaccysave = textaccyhelper
