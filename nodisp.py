@@ -498,12 +498,17 @@ if __name__ == '__main__':
             textcfay = font.render("CY:" + str(textcfayhelper), 1, (WHITE))
             texthead = font.render("HD:" + str(textheadhelper), 1, (WHITE))
 
+            background.blit(textaccx, textpos)
+            background.blit(textaccy, textpos)
+            background.blit(textcfax, textpos)
+            background.blit(textcfay, textpos)
+            background.blit(texthead, textpos)
             screen.blit(textaccx, (5, 114))
             screen.blit(textaccy, (5, 128))
             screen.blit(textcfax, (70, 114))
             screen.blit(textcfay, (70, 128))
             screen.blit(texthead, (5, 142))
-            background.blit(text, textpos)
+            pygame.display.flip()
 
             textaccxsave = textaccxhelper
             textaccysave = textaccyhelper
