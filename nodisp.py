@@ -436,7 +436,7 @@ if __name__ == '__main__':
             textaccysave = float(textaccysave)
             textcfaxsave = float(textcfaxsave)
             textcfaysave = float(textcfaysave)
-            displaygpsspeed = savedataspeed * 0.621371
+            displaygpsspeed = float(savedataspeed) * 0.621371
             displaygpsspeed = str(displaygpsspeed)
             displaytemp = "Temp:" + str(t) + "C"
             displaypres = "Pres:" + str(p) + "hPa"
