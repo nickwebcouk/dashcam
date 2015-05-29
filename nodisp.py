@@ -454,7 +454,7 @@ if __name__ == '__main__':
             # -----SPEED (VARIABLE)-----
             font = pygame.font.Font("/home/pi/pidashcam/bold.ttf", 72)
             speedtext = font.render(displaygpsspeed, 1, (WHITE))
-            textpos = text.get_rect(centerx=background.get_width() / 2, centery=26)
+            textpos = speedtext.get_rect(centerx=background.get_width() / 2, centery=26)
 
             background.blit(text, textpos)
             screen.blit(background, (0, 0))
@@ -462,7 +462,7 @@ if __name__ == '__main__':
             # -----MPH (STATIC TEXT)-----
             font = pygame.font.Font("/home/pi/pidashcam/audi.ttf", 14)
             mphtext = font.render("MPH", 1, (WHITE))
-            textpos = text.get_rect(centerx=background.get_width() / 2, centery=65)
+            textpos = mphtext.get_rect(centerx=background.get_width() / 2, centery=65)
 
             background.blit(text, textpos)
             screen.blit(background, (0, 0))
